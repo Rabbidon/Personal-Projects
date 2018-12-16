@@ -1,0 +1,54 @@
+# depslib dependency file v1.0
+1541700413 source:/home/edwin/C++Stuff/NQueens/backtracking.cpp
+	<iostream>
+	<vector>
+	"backtracking.h"
+
+1541688406 source:/home/edwin/C++Stuff/NQueens/main.cpp
+	<iostream>
+	<vector>
+	"annealing.cpp"
+
+1541700387 source:/home/edwin/C++Stuff/NQueens/annealing.cpp
+	<iostream>
+	<vector>
+	"fitness.h"
+	"heuristic.h"
+	"annealing.h"
+	<math.h>
+
+1541700337 /home/edwin/C++Stuff/NQueens/annealing.h
+	<vector>
+
+1541700396 /home/edwin/C++Stuff/NQueens/fitness.h
+	<vector>
+
+1541700337 /home/edwin/C++Stuff/NQueens/heuristic.h
+	<vector>
+
+1541688722 /home/edwin/C++Stuff/NQueens/annealing.cpp
+	<iostream>
+	<vector>
+	"fitness.cpp"
+	"heuristic.cpp"
+	<math.h>
+
+1541700421 source:/home/edwin/C++Stuff/NQueens/fitness.cpp
+	<iostream>
+	<vector>
+	"fitness.h"
+
+1539293404 source:/home/edwin/C++Stuff/NQueens/heuristic.cpp
+	<iostream>
+	<vector>
+
+1539291801 /home/edwin/C++Stuff/NQueens/fitness.cpp
+	<iostream>
+	<vector>
+
+1539293404 /home/edwin/C++Stuff/NQueens/heuristic.cpp
+	<iostream>
+	<vector>
+
+1541700373 /home/edwin/C++Stuff/NQueens/backtracking.h
+
