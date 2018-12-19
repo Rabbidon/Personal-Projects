@@ -57,7 +57,16 @@ void Context::handleEvents()
 	}
 }
 void Context::update(){}
-void Context::render(){}
-void Context::clean(){}
+void Context::render()
+{
+	SDL_RenderClear(renderer);
+	SDL_RenderPresent(renderer);
+}
+void Context::clean()
+{
+	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
+	SDL_Quit();
+}
 
 
