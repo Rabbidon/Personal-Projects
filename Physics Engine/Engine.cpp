@@ -14,7 +14,7 @@ Engine::~Engine()
 
 void Engine::update()
 {
-	for (Ball ball : balls)
+	for (Ball& ball : balls)
 	{
 		ball.update();
 	}
