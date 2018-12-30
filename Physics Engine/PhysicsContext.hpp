@@ -1,11 +1,12 @@
+#include "Engine.hpp"
 #include <SFML/Graphics.hpp>
-#include <stdio.h>
 
 //Header file for the Physics Context class.
-class Context{
+class Context
+{
 	public:
 
-		Context();
+		Context(float cool);
 		~Context();
 
 		void run(const char* title, int width, int height, bool fullscreen);
@@ -16,4 +17,6 @@ class Context{
 
 	private:
 		sf::RenderWindow *window;
+		Engine *engine;
+		float cooldown;
 };

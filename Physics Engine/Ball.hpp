@@ -1,22 +1,23 @@
-#include <SDL2/SDL.h>
-#include "Engine.hpp"
+#include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Ball
 {
-	Ball(double radius, double x, double y);
-	~Ball();
 
 public:
-	double getRadius(){return radius}
-	double getX(){return x}
-	double getY(){return y}
-	SDL_Color getColor(){return color}
-	void update(Engine engine);
-	void draw();
+
+	Ball(float radius, sf::Vector2f position, sf::Color color);
+
+	~Ball();
+
+	sf::Color getColor(){return color;}
+	sf::Vector2f getPosition(){return position;}
+	void update();
+	void draw(sf::RenderWindow *window);
 
 private:
-	double radius();
-	double x();
-	double y();	
-	SDL_Color color();
-}
+    float radius;
+    sf::CircleShape sprite;
+    sf::Color color;
+    sf::Vector2f position;
+};
