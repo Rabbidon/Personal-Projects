@@ -21,4 +21,6 @@ private:
 
 	std::vector<Ball> balls;
 	time_t time;
+	int width;
+	int height;
 };

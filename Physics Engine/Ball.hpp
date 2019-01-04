@@ -12,12 +12,17 @@ public:
 
 	sf::Color getColor(){return color;}
 	sf::Vector2f getPosition(){return position;}
-	void update();
+	void update(int width, int height);
 	void draw(sf::RenderWindow *window);
+	void collideBall(Ball);
+	void collideWall(int width, int height);
 
 private:
     float radius;
+    float speed;
+    float angle;
     sf::CircleShape sprite;
     sf::Color color;
     sf::Vector2f position;
+    sf::Vector2f direction;
 };

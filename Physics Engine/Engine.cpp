@@ -5,6 +5,8 @@ Engine::Engine(float cool)
 	{
 		cooldown = cool;
 		time = clock();
+		width = sf::VideoMode::getDesktopMode().width;
+		height = sf::VideoMode::getDesktopMode().height;
 	}
 
 Engine::~Engine()
@@ -16,7 +18,7 @@ void Engine::update()
 {
 	for (Ball& ball : balls)
 	{
-		ball.update();
+		ball.update(width,height);
 	}
 	if((sf::Keyboard::isKeyPressed(sf::Keyboard::X)) & (cooldown<((float)(clock()-time))/CLOCKS_PER_SEC))
 	{
