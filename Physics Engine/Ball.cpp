@@ -40,12 +40,26 @@ void Ball::collideBall(Ball other)
 
 void Ball::collideWall(int width, int height)
 {
-	if ((position.x<radius) or (position.x>width-radius))
+	if (position.x<radius)
 	{
 		direction.x = -1*direction.x;
+		position.x += 2*(radius-position.x);
 	}
-	if ((position.y<radius) or (position.y>height-radius))
+
+	if (position.x>width-radius)
+	{
+		direction.x = -1*direction.x;
+		position.x += 2*(width-radius-position.x);
+	}
+	if (position.y<radius)
 	{
 		direction.y = -1*direction.y;
+		position.y += 2*(radius-position.y);
+	}
+
+	if (position.y>height-radius)
+	{
+		direction.y = -1*direction.y;
+		position.y += 2*(height-radius-position.y);
 	}
 }
