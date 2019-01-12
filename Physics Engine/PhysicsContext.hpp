@@ -6,7 +6,7 @@ class Context
 {
 	public:
 
-		Context(float cool);
+		Context();
 		~Context();
 
 		void run(const char* title, int width, int height, bool fullscreen);
@@ -18,5 +18,6 @@ class Context
 	private:
 		sf::RenderWindow *window;
 		Engine *engine;
-		float cooldown;
+		bool mousePressed;
+		sf::Clock clock;
 };

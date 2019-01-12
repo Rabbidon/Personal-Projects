@@ -12,7 +12,7 @@ public:
 
 	sf::Color getColor(){return color;}
 	sf::Vector2f getPosition(){return position;}
-	void update(int width, int height);
+	void update(int width, int height, float dt);
 	void draw(sf::RenderWindow *window);
 	void collideBall(Ball);
 	void collideWall(int width, int height);

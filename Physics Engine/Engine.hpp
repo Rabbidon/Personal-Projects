@@ -8,14 +8,12 @@ class Engine
 
 public:
 
-	Engine(float cool);
+	Engine();
 	~Engine();
 
-	void update();
+	void update(bool mousePressed, float dt);
 	void drawAll(sf::RenderWindow *window);
 	void spawn(Ball);
-
-	float cooldown;
 
 private:
 

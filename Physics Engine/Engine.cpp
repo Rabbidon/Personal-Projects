@@ -1,9 +1,9 @@
 #include "Engine.hpp"
 #include <iostream>
 
-Engine::Engine(float cool)
+Engine::Engine()
 	{
-		cooldown = cool;
+
 		time = clock();
 		width = sf::VideoMode::getDesktopMode().width;
 		height = sf::VideoMode::getDesktopMode().height;
@@ -14,13 +14,13 @@ Engine::~Engine()
 
 }
 
-void Engine::update()
+void Engine::update(bool mousePressed, float dt)
 {
 	for (Ball& ball : balls)
 	{
-		ball.update(width,height);
+		ball.update(width,height,dt);
 	}
-	if((sf::Keyboard::isKeyPressed(sf::Keyboard::X)) & (cooldown<((float)(clock()-time))/CLOCKS_PER_SEC))
+	if(mousePressed)
 	{
 		time = clock();
 		Ball newBall = Ball(50.f,static_cast<sf::Vector2f>(sf::Mouse::getPosition()),sf::Color(100, 250, 50));

@@ -1,9 +1,9 @@
 #include "PhysicsContext.hpp"
 #include <iostream>
 
-Context::Context(float cool)
+Context::Context()
 {
-	cooldown = cool;
+
 }
 Context::~Context()
 {
@@ -20,7 +20,7 @@ void Context::run(const char* title, int width, int height, bool fullscreen)
 
 	sf::RenderWindow app(sf::VideoMode(width, height), "Test Window", style);
 	window = &app;
-	Engine eng = Engine(cooldown);
+	Engine eng = Engine();
 	engine = &eng;
 
 	while (window->isOpen())
@@ -42,6 +42,11 @@ void Context::handleEvents()
 			case sf::Event::Closed:
 				window->close();
 				break;
+			case sf::Event::MouseButtonPressed:
+				if (event.mouseButton.button == sf::Mouse::Left)
+				{
+					mousePressed = true;
+				}
 			case sf::Event::KeyPressed:
 				if (event.key.code == sf::Keyboard::Escape)
 				{
@@ -56,7 +61,10 @@ void Context::handleEvents()
 
 void Context::update()
 {
-	engine->update();
+	float dt = clock.getElapsedTime().asSeconds();
+	clock.restart();
+	engine->update(mousePressed,dt);
+	mousePressed = false;
 }
 
 void Context::render()

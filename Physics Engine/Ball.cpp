@@ -3,7 +3,7 @@
 
 Ball::Ball(float rad, sf::Vector2f pos, sf::Color col)
 {
-	speed = 5;
+	speed = 1000;
 	angle = (rand() % 1000000)*(2*M_PI)/1000000;
 	direction = sf::Vector2f(sin(angle),cos(angle));
 	radius = rad;
@@ -20,11 +20,11 @@ Ball::~Ball()
 
 }
 
-void Ball::update(int width, int height)
+void Ball::update(int width, int height, float dt)
 {
 	collideWall(width, height);
-	position += speed*direction;
-	sprite.move(speed*direction);
+	position += dt*speed*direction;
+	sprite.move(dt*speed*direction);
 	sprite.setFillColor(sf::Color(100, 250, 50));
 }
 
