@@ -16,9 +16,11 @@ Engine::~Engine()
 
 void Engine::update(bool mousePressed, float dt)
 {
-	for (Ball& ball : balls)
+	for (int i = 0; i<balls.size(); i++)
 	{
-		ball.update(width,height,dt);
+		for (int j=0; j<i; j++)
+		balls[i].collideBall(balls[j]);
+		balls[i].update(width,height,dt);
 	}
 	if(mousePressed)
 	{

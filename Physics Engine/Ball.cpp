@@ -33,9 +33,22 @@ void Ball::draw(sf::RenderWindow *window)
 	window->draw(sprite);
 }
 
-void Ball::collideBall(Ball other)
+void Ball::collideBall(Ball& other)
 {
+	sf::Vector2f normal = position-other.getPosition();
+	if (pow(normal.x,2)+pow(normal.y,2) < 10000)
+	{
+		normal /= (float)sqrt(pow(normal.x,2)+pow(normal.y,2));
+		std::cout << direction.x << std::endl;
+		direction -= 2*((normal.x*direction.x)+(normal.y*direction.y))*normal;
+		std::cout << direction.x << std::endl;
+		other.bump(normal);
+	}
+}
 
+void Ball::bump(sf::Vector2f normal)
+{
+	direction -= 2*((normal.x*direction.x)+(normal.y*direction.y))*normal;;
 }
 
 void Ball::collideWall(int width, int height)
