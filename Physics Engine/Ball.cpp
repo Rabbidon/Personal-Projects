@@ -39,16 +39,20 @@ void Ball::collideBall(Ball& other)
 	if (pow(normal.x,2)+pow(normal.y,2) < 10000)
 	{
 		normal /= (float)sqrt(pow(normal.x,2)+pow(normal.y,2));
-		std::cout << direction.x << std::endl;
-		direction -= 2*((normal.x*direction.x)+(normal.y*direction.y))*normal;
-		std::cout << direction.x << std::endl;
+		if ((normal.x*direction.x)+(normal.y*direction.y)<0)
+		{
+			direction -= 2*((normal.x*direction.x)+(normal.y*direction.y))*normal;
+		}
 		other.bump(normal);
 	}
 }
 
 void Ball::bump(sf::Vector2f normal)
 {
-	direction -= 2*((normal.x*direction.x)+(normal.y*direction.y))*normal;;
+	if ((normal.x*direction.x)+(normal.y*direction.y)>0)
+		{
+			direction -= 2*((normal.x*direction.x)+(normal.y*direction.y))*normal;
+		}
 }
 
 void Ball::collideWall(int width, int height)
