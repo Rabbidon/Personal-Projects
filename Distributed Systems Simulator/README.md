@@ -1,0 +1,1 @@
+The aim here is to make a framework that can simulate computer networks for testing purposes etc.
