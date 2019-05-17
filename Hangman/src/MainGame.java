@@ -56,7 +56,14 @@ public class MainGame
                     }
                     if (game.getLives()==0)
                     {
-                        System.out.println("You have run out of lives. You may start a new game (Enter \"n\") or quit (Enter \"x\")");
+                        int dashPointer = 0;
+                        while (dashPointer<dashString.length())
+                        {
+                            if (dashString.charAt(dashPointer)==' ') {dashString.deleteCharAt(dashPointer);}
+                            else {dashPointer++;}
+                        }
+                        System.out.println("You have run out of lives");
+                        System.out.println("You may start a new game (Enter \"n\") or quit (Enter \"x\")");
                         break;
                     }
                     if (game.checkWinCondition())

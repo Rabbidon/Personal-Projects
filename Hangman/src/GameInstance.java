@@ -38,6 +38,7 @@ public class GameInstance
     {
         wordLength = 0;
         wordMap.clear();
+        posToGuess = new HashSet<>();
         String myWord = wordBank[ThreadLocalRandom.current().nextInt(0, 26)];
         for (int i=0; i<myWord.length(); i++)
         {
