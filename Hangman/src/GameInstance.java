@@ -5,96 +5,67 @@
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class GameInstance
 {
     // The word bank from which we randomly pick the target word.
-    private String[] wordBank = {"alpha","bravo","charlie","delta","echo","foxtrot","golf","hotel","india","juliett","kilo","lima","mike","november","oscar","papa","quebec","romeo","sierra","tango","uniform","victor","whiskey","xray","yankee","zulu"};
+    private static String[] wordBank = {"alpha","bravo","charlie","delta","echo","foxtrot","golf","hotel","india","juliett","kilo","lima","mike","november","oscar","papa","quebec","romeo","sierra","tango","uniform","victor","whiskey","xray","yankee","zulu"};
 
     // Store all chars tried thus far
-    private Set<String> lettersTried = new HashSet();
+    private Set<Integer> lettersTried = new HashSet();
 
     // Stores the target word (which we are trying to guess)
-    private Map<Character,List<Integer>> wordMap = new HashMap<Character,List<Integer>>();
+    private String targetWord = "";
 
-    // Stores the number of lives the player has
-    private int lives;
-
-    private int wordLength=0;
-
-    // Keeps track of the characters that the player has yet to guess
-    private Set posToGuess = new HashSet<>();
-
-    private final int livesDefault = 8;
+    private int startingLives;
 
     // Default constructor
-    public GameInstance()
+    public GameInstance(int lives)
     {
-        lives = livesDefault;
+        startingLives = lives;
     }
 
-    // This randomly selects a word from the word bank. wordLength is set to the length of the new word.
+    // This randomly selects a word from the word bank.
     public void generateWord()
     {
-        wordLength = 0;
-        wordMap.clear();
-        posToGuess = new HashSet<>();
-        String myWord = wordBank[ThreadLocalRandom.current().nextInt(0, 26)];
-        for (int i=0; i<myWord.length(); i++)
-        {
-
-            List<Integer> entry = wordMap.getOrDefault(myWord.charAt(i),new ArrayList<Integer>());
-            entry.add(i);
-            wordMap.put(myWord.charAt(i),entry);
-            posToGuess.add(i);
-            wordLength++;
-        }
+        targetWord = wordBank[ThreadLocalRandom.current().nextInt(0, 26)];
     }
 
     // This method handles queries from the shell.
-    public List<Integer> handle (String input)
+    public int handle(char c)
     {
-        List posList = new ArrayList<Integer>();
-
-        if (input.length()!=1)    {posList.add(-3); return posList;}
-
-        char tmp = input.charAt(0);
-
-        if (((int)tmp<'a') | ((int)tmp>'z'))    {posList.add(-3); return posList;}
-
-        if (lettersTried.contains(Character.toString(tmp)))     {posList.add(-2); return posList;}
-
-        lettersTried.add(Character.toString(tmp));
-
-        if (wordMap.containsKey(tmp))
-        {
-            for (int i : wordMap.get(tmp))
-            {
-                posToGuess.remove(i);
-            }
-            return wordMap.get(tmp);
-        }
-
-        posList.add(-1);
-        lives--;
-        return posList;
+        if (lettersTried.contains((int)c)){return -1;}
+        lettersTried.add((int)c);
+        if (targetWord.indexOf(c)==-1) {return 0;}
+        return 1;
     }
 
-    // Resets the life counter
-    public void resetLives() {lives = livesDefault;}
-
-    // Resets the set of letter that are labelled as "already tried"
-    public void resetLettersTried() {lettersTried = new HashSet();}
-
     // Allows us to access the life counter
-    public int getLives() { return lives; }
-
-    public int getWordLength() { return wordLength; }
+    public int getLives()
+    {
+        Set<Integer> guessedRight = new HashSet(targetWord.chars().boxed().collect(Collectors.toList()));
+        guessedRight.retainAll(lettersTried);
+        return startingLives - (lettersTried.size()-guessedRight.size());
+    }
 
     // Allows us to access the set of letters we have already tried
-    public Set getLettersTried() { return lettersTried; }
+    public Set<Integer> getLettersTried() { return lettersTried; }
 
-    public boolean checkWinCondition()
-    { return posToGuess.isEmpty(); }
+    public String getTargetWord() {return targetWord;}
+
+    // Gives us the dashed string
+    public String getDashString()
+    {
+        StringBuilder dashString = new StringBuilder();
+        for (int i=0; i<targetWord.length(); i++)
+        {
+            if (lettersTried.contains((int)(targetWord.charAt(i)))){dashString.append(targetWord.charAt(i));}
+            else {dashString.append('-');}
+        }
+        return dashString.toString();
+    }
+
+    public boolean victoryCondition() {return lettersTried.containsAll(new HashSet(targetWord.chars().boxed().collect(Collectors.toList())));}
 
 }
